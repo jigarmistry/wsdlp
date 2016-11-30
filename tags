@@ -1,0 +1,16 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+authenticationHeader	main.py	/^authenticationHeader = {$/;"	kind:variable	line:21
+base64string	main.py	/^base64string = base64.encodestring('%s:%s' % (username, password)).replace('\\n', '')$/;"	kind:variable	line:20
+client	main.py	/^client = Client(url=wsdl_url, location=soap_url,plugins=[ImportDoctor(imp)],headers=authenticationHeader)$/;"	kind:variable	line:26
+cwd	main.py	/^cwd = os.getcwd()$/;"	kind:variable	line:12
+imp	main.py	/^imp = Import('http:\/\/schemas.xmlsoap.org\/soap\/encoding\/', location='http:\/\/schemas.xmlsoap.org\/soap\/encoding\/')$/;"	kind:variable	line:15
+main.py	main.py	1;"	kind:file	line:1
+password	main.py	/^password = "xg8229jf"$/;"	kind:variable	line:19
+soap_url	main.py	/^soap_url = 'https:\/\/soapbeta.streamflow.ca\/ipl\/soap'$/;"	kind:variable	line:5
+username	main.py	/^username = "ipl"$/;"	kind:variable	line:18
+wsdl_url	main.py	/^wsdl_url = 'file:\/\/%s\/soap.wsdl' % cwd$/;"	kind:variable	line:13
