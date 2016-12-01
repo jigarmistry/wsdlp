@@ -1,70 +1,51 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <definitions 
     xmlns="http://schemas.xmlsoap.org/wsdl/" 
-    xmlns:tns="http://xml.apache.org/xml-soap" 
+    xmlns:tns="https://soapbeta.streamflow.ca/ipl/soap" 
     xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" 
     xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+    xmlns:ns2="http://xml.apache.org/xml-soap" 
     xmlns:soap-enc="http://schemas.xmlsoap.org/soap/encoding/" 
     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" name="Application_Model_IplSoap" targetNamespace="https://soapbeta.streamflow.ca/ipl/soap">
     <types>
-        <schema>
-            <import namespace="http://schemas.xmlsoap.org/soap/encoding/" schemaLocation="http://schemas.xmlsoap.org/soap/encoding/"/>
-            <element name="requests">
-                <complexType>
-                    <element name='item' maxOccurs="100">
-                        <complexType>
-                            <sequence>
-                                <element name="key" type="string"/>
-                                <element name="value" type="string"/>
-                            </sequence>
-                        </complexType>
-                    </element>
-                </complexType>
-            </element>
-        </schema>
+        <xsd:schema targetNamespace="http://xml.apache.org/xml-soap">
+            <xsd:element name="requests" type="ns2:Map" />
+            <xsd:element name="return" type="ns2:Map" />
+            <xsd:complexType name="Map" maxOccurs="500">
+                <xsd:all>
+                    <xsd:element name="item" type="ns2:Item"/>
+                </xsd:all>
+            </xsd:complexType>
+            <xsd:complexType name="Item" maxOccurs="500">
+                <xsd:all>
+                    <xsd:element name="key" type="xsd:string"/>
+                    <xsd:element name="value" type="xsd:string"/>
+                </xsd:all>
+            </xsd:complexType>
+        </xsd:schema>
     </types>
-    <message name="searchModelsIn">
-        <part name="requests" element="tns:requests"/>
-    </message>
-    <message name="searchModelsOut">
-        <part name="return" element="tns:requests"/>
-    </message>
-    <message name="getModelSectionsIn">
-        <part name="requests" element="tns:requests"/>
-    </message>
-    <message name="getModelSectionsOut">
-        <part name="return" element="tns:requests"/>
-    </message>
-    <message name="getModelSectionsPartsIn">
-        <part name="requests" element="tns:requests"/>
-    </message>
-    <message name="getModelSectionsPartsOut">
-        <part name="return" element="tns:requests"/>
-    </message>
-    <message name="modelSearchPartsIn">
-        <part name="requests" element="tns:requests"/>
-    </message>
-    <message name="modelSearchPartsOut">
-        <part name="return" element="tns:requests"/>
-    </message>
     <portType name="Application_Model_IplSoapPort">
         <operation name="searchModels">
-            <documentation>searchModels                Searches IPL Models            </documentation>
+            <documentation>searchModelsSearches IPL Models</documentation>
             <input message="tns:searchModelsIn"/>
             <output message="tns:searchModelsOut"/>
         </operation>
+        <operation name="getPartModels">
+            <documentation>getPartModelsGet all Models for a Part Number</documentation>
+            <input message="tns:getPartModelsIn"/>
+            <output message="tns:getPartModelsOut"/>
+        </operation>
         <operation name="getModelSections">
-            <documentation>getModelSections                Get all Model Sections            </documentation>
+            <documentation>getModelSectionsGet all Model Sections</documentation>
             <input message="tns:getModelSectionsIn"/>
             <output message="tns:getModelSectionsOut"/>
         </operation>
         <operation name="getModelSectionsParts">
-            <documentation>getModelSectionsParts                Get all Parts in a Model Section            </documentation>
+            <documentation>getModelSectionsPartsGet all Parts in a Model Section</documentation>
             <input message="tns:getModelSectionsPartsIn"/>
             <output message="tns:getModelSectionsPartsOut"/>
         </operation>
         <operation name="modelSearchParts">
-            <documentation>modelSearchParts                Search for Parts in a Model            </documentation>
+            <documentation>modelSearchPartsSearch for Parts in a Model</documentation>
             <input message="tns:modelSearchPartsIn"/>
             <output message="tns:modelSearchPartsOut"/>
         </operation>
@@ -73,6 +54,15 @@
         <soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
         <operation name="searchModels">
             <soap:operation soapAction="https://soapbeta.streamflow.ca/ipl/soap#searchModels"/>
+            <input>
+                <soap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="https://soapbeta.streamflow.ca/ipl/soap"/>
+            </input>
+            <output>
+                <soap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="https://soapbeta.streamflow.ca/ipl/soap"/>
+            </output>
+        </operation>
+        <operation name="getPartModels">
+            <soap:operation soapAction="https://soapbeta.streamflow.ca/ipl/soap#getPartModels"/>
             <input>
                 <soap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="https://soapbeta.streamflow.ca/ipl/soap"/>
             </input>
@@ -110,7 +100,37 @@
     </binding>
     <service name="Application_Model_IplSoapService">
         <port name="Application_Model_IplSoapPort" binding="tns:Application_Model_IplSoapBinding">
-            <!--<soap:address location="https://soapbeta.streamflow.ca/ipl/soap"/>-->
+            <soap:address location="https://soapbeta.streamflow.ca/ipl/soap"/>
         </port>
     </service>
+    <message name="searchModelsIn">
+        <part name="requests" element="ns2:requests"/>
+    </message>
+    <message name="searchModelsOut">
+        <part name="return" element="ns2:return"/>
+    </message>
+    <message name="getPartModelsIn">
+        <part name="requests" element="ns2:requests"/>
+    </message>
+    <message name="getPartModelsOut">
+        <part name="return" element="ns2:return"/>
+    </message>
+    <message name="getModelSectionsIn">
+        <part name="requests" element="ns2:requests"/>
+    </message>
+    <message name="getModelSectionsOut">
+        <part name="return" element="ns2:return"/>
+    </message>
+    <message name="getModelSectionsPartsIn">
+        <part name="requests" element="ns2:requests"/>
+    </message>
+    <message name="getModelSectionsPartsOut">
+        <part name="return" element="ns2:return"/>
+    </message>
+    <message name="modelSearchPartsIn">
+        <part name="requests" element="ns2:requests"/>
+    </message>
+    <message name="modelSearchPartsOut">
+        <part name="return" element="ns2:return"/>
+    </message>
 </definitions>
