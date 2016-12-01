@@ -20,25 +20,25 @@ authenticationHeader = {
     "Authorization" : "Basic %s" % base64string
 }
 
-client = Client(url=wsdl_url,location= soap_url, plugins=[ImportDoctor(imp)],headers=authenticationHeader)
+client = Client(url=wsdl_url, location=soap_url, plugins=[ImportDoctor(imp)], headers=authenticationHeader)
 
 # Get Part Models
 a = client.factory.create("ns2:Map")
 a.item.key = "partNumber"
 a.item.value = "341241"
-# print client.service.getPartModels(a)
+print client.service.getPartModels(a)
 
 # Get Model Sections
 b = client.factory.create("ns2:Map")
 b.item.key = "modelId"
 b.item.value = "87048"
-# print client.service.getModelSections(b)
+print client.service.getModelSections(b)
 
 # Search Models
 c = client.factory.create("ns2:Map")
 c.item.key = "modelNumber"
 c.item.value = "mav600"
-# print client.service.searchModels(c)
+print client.service.searchModels(c)
 
 # Get Model Sections Parts
 d = client.factory.create("ns2:Item")
@@ -51,7 +51,7 @@ e.value = "525454"
 
 f = client.factory.create("ns2:Map")
 f.item = [d,e]
-# print client.service.getModelSectionsParts(f)
+print client.service.getModelSectionsParts(f)
 
 # Model Search Parts
 g = client.factory.create("ns2:Item")
